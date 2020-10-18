@@ -1,0 +1,61 @@
+@layout('layouts.master')
+@section('title')
+  Register | Adonis
+@endsection
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="margin-top:50px;">
+
+      @if(flashMessage('successMessage'))
+        <div class="alert alert-success text-center">
+          <strong>  {{ flashMessage('successMessage') }} </strong>
+        </div>
+      @endif
+
+      
+      @if(hasErrorFor('email'))
+        <div class="alert alert-danger text-center">
+          <strong>  {{ getErrorFor('email') }} </strong>
+        </div>
+      @endif
+
+
+      @if(hasErrorFor('password'))
+      <div class="alert alert-danger text-center">
+        <strong>  {{ getErrorFor('password') }} </strong>
+      </div>
+     @endif
+
+
+
+      {{--  form  --}}
+    <form action="{{ route('login.store') }}" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+          <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+        </div>
+     
+
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" id="pwd" name="password"  value="{{ old('password') }}">
+        </div>
+
+       
+        <button type="submit" class="btn btn-success btn-block">LOGIN</button>
+      </form>
+      {{--  form  --}}
+
+      <br>
+ 
+      </ul>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+@endsection
